@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "225103342770",
+    "project_id": "playersteamsquiz",
+    "storage_bucket": "playersteamsquiz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225103342770:android:b84dc4a467a171c00aedab",
+        "android_client_info": {
+          "package_name": "com.abrebo.playersteamsquiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCpUJbE3ul-g4VFcy13vEAbsQQnUcQ7Fo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
