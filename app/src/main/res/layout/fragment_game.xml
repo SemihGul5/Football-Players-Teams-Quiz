@@ -122,8 +122,7 @@
         android:layout_margin="8dp"
         android:visibility="gone"
         android:contentDescription="@string/answer"
-        android:scaleType="fitCenter"
-        android:src="@drawable/placeholder" />
+        android:scaleType="fitCenter"/>
 
     <LinearLayout
         android:id="@+id/game2LinearLayout"

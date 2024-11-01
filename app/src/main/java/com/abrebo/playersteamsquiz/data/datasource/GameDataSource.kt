@@ -35,6 +35,8 @@ class GameDataSource(
             101 -> collectionReferenceGame1Medium
             201 -> collectionReferenceGame1Hard
             2 -> collectionReferenceGame1Medium
+            102 -> collectionReferenceGame1Hard
+            202 -> collectionReferenceGame2Easy
             3 -> collectionReferenceGame1Hard
             4 -> collectionReferenceGame2Easy
             5 -> collectionReferenceGame2Medium
@@ -54,6 +56,8 @@ class GameDataSource(
             101 -> collectionReferenceGame1Medium
             201 -> collectionReferenceGame1Hard
             2 -> collectionReferenceGame1Medium
+            102 -> collectionReferenceGame1Hard
+            202 -> collectionReferenceGame2Easy
             3 -> collectionReferenceGame1Hard
             4 -> collectionReferenceGame2Easy
             5 -> collectionReferenceGame2Medium
@@ -92,6 +96,8 @@ class GameDataSource(
             101 -> collectionReferenceGame1Medium
             201 -> collectionReferenceGame1Hard
             2 -> collectionReferenceGame1Medium
+            102 -> collectionReferenceGame1Hard
+            202 -> collectionReferenceGame2Easy
             3 -> collectionReferenceGame1Hard
             4 -> collectionReferenceGame2Easy
             5 -> collectionReferenceGame2Medium
@@ -120,6 +126,8 @@ class GameDataSource(
             101 -> collectionReferenceGame1Medium
             201 -> collectionReferenceGame1Hard
             2 -> collectionReferenceGame1Medium
+            102 -> collectionReferenceGame1Hard
+            202 -> collectionReferenceGame2Easy
             3 -> collectionReferenceGame1Hard
             4 -> collectionReferenceGame2Easy
             5 -> collectionReferenceGame2Medium
