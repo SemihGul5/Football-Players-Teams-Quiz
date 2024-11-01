@@ -32,6 +32,8 @@ class GameDataSource(
     suspend fun getHighestScore(userId: String, game: Int): Int {
         val collectionReference = when (game) {
             1 -> collectionReferenceGame1Easy
+            101 -> collectionReferenceGame1Medium
+            201 -> collectionReferenceGame1Hard
             2 -> collectionReferenceGame1Medium
             3 -> collectionReferenceGame1Hard
             4 -> collectionReferenceGame2Easy
@@ -49,6 +51,8 @@ class GameDataSource(
     suspend fun saveHighestScore(userId: String, score: Int,game:Int) {
         val collectionReference = when (game) {
             1 -> collectionReferenceGame1Easy
+            101 -> collectionReferenceGame1Medium
+            201 -> collectionReferenceGame1Hard
             2 -> collectionReferenceGame1Medium
             3 -> collectionReferenceGame1Hard
             4 -> collectionReferenceGame2Easy
@@ -85,6 +89,8 @@ class GameDataSource(
     private suspend fun updateUserRanks(game:Int) {
         val collectionReference = when (game) {
             1 -> collectionReferenceGame1Easy
+            101 -> collectionReferenceGame1Medium
+            201 -> collectionReferenceGame1Hard
             2 -> collectionReferenceGame1Medium
             3 -> collectionReferenceGame1Hard
             4 -> collectionReferenceGame2Easy
@@ -111,6 +117,8 @@ class GameDataSource(
     suspend fun getAllRankUsers(game:Int): List<RankUser> {
         val collectionReference = when (game) {
             1 -> collectionReferenceGame1Easy
+            101 -> collectionReferenceGame1Medium
+            201 -> collectionReferenceGame1Hard
             2 -> collectionReferenceGame1Medium
             3 -> collectionReferenceGame1Hard
             4 -> collectionReferenceGame2Easy

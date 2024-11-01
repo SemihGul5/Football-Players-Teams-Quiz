@@ -63,12 +63,13 @@ class GameFragment : Fragment() {
         viewModel.nextQuestion(id)
 
         when (id) {
-            1 -> {
-                binding.materialToolbar2.title=requireContext().getString(R.string.FindtheFlagbyCountryName)
+            1,101,201-> {
+                binding.materialToolbar2.title= "Futbolcunun Fotoğrafını Bulun $id"
                 imageViews = listOf(binding.image1, binding.image2, binding.image3, binding.image4)
-                viewModel.prepareQuestionsGame1()
+                viewModel.prepareQuestionsGame1(id)
                 setupProgressAndTimer(10,10,10000)
             }
+
 
         }
 
@@ -100,7 +101,7 @@ class GameFragment : Fragment() {
     private fun setupObservers(id: Int) {
         viewModel.currentQuestion.observe(viewLifecycleOwner) { question ->
             when (id) {
-                1 -> {
+                1,101,201 -> {
                     binding.game1CountryNameText.text = question.player_name
                     imageViews.forEachIndexed { index, imageView ->
                         imageView.setImageResource(question.options[index] as Int)
@@ -113,7 +114,7 @@ class GameFragment : Fragment() {
 
     private fun setupClickListeners(id: Int) {
         when (id) {
-            1 -> {
+            1,101,201 -> {
                 imageViews.forEach { imageView ->
                     imageView.setOnClickListener { view ->
                         val selectedDrawable = view.tag as Int
@@ -121,9 +122,7 @@ class GameFragment : Fragment() {
                             showScoreDialog(id)
                         } else {
                             viewModel.nextQuestion(id)
-                            if (id == 1) {
-                                resetTimer(10000, id)
-                            }
+                            resetTimer(10000, id)
                         }
                     }
                 }
@@ -152,7 +151,7 @@ class GameFragment : Fragment() {
         binding.progressBar.progress = secondsLeft
 
         when (id) {
-            6 -> {
+            20 -> {
                 when {
                     secondsLeft > 40 -> {
                         val greenColor = ContextCompat.getColor(requireContext(), R.color.green)
@@ -160,25 +159,6 @@ class GameFragment : Fragment() {
                         binding.progressBar.progressTintList = ColorStateList.valueOf(greenColor)
                     }
                     secondsLeft > 20 -> {
-                        val yellowColor = ContextCompat.getColor(requireContext(), R.color.yellow)
-                        binding.timerText.setTextColor(yellowColor)
-                        binding.progressBar.progressTintList = ColorStateList.valueOf(yellowColor)
-                    }
-                    else -> {
-                        val redColor = ContextCompat.getColor(requireContext(), R.color.red)
-                        binding.timerText.setTextColor(redColor)
-                        binding.progressBar.progressTintList = ColorStateList.valueOf(redColor)
-                    }
-                }
-            }
-            1, 2,8 -> {
-                when {
-                    secondsLeft > 7 -> {
-                        val greenColor = ContextCompat.getColor(requireContext(), R.color.green)
-                        binding.timerText.setTextColor(greenColor)
-                        binding.progressBar.progressTintList = ColorStateList.valueOf(greenColor)
-                    }
-                    secondsLeft > 3 -> {
                         val yellowColor = ContextCompat.getColor(requireContext(), R.color.yellow)
                         binding.timerText.setTextColor(yellowColor)
                         binding.progressBar.progressTintList = ColorStateList.valueOf(yellowColor)
@@ -241,7 +221,7 @@ class GameFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        (activity as? HomeFragment)?.hideProgressBar()  // HomeFragment'taki ProgressBar'ı gizle
+        (activity as? HomeFragment)?.hideProgressBar()
     }
 }
 

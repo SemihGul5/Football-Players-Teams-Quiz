@@ -37,9 +37,16 @@ class QuizViewModel @Inject constructor (var repository: Repository, application
         _score.value = 0
     }
 
-    fun prepareQuestionsGame1() {
+    fun prepareQuestionsGame1(id: Int) {
         val allPlayers = repository.getAllPlayers()
-        val shuffledPlayers = allPlayers.shuffled()
+        val playersToUse = when (id) {
+            1 -> allPlayers.take(180)
+            101 -> allPlayers.take(360)
+            201 -> allPlayers
+            else -> allPlayers.take(180)
+        }
+
+        val shuffledPlayers = playersToUse.shuffled()
         shuffledPlayers.forEach { correctPlayer ->
             val options = shuffledPlayers
                 .filter { it.id != correctPlayer.id }
@@ -65,6 +72,7 @@ class QuizViewModel @Inject constructor (var repository: Repository, application
             questions.add(question)
         }
     }
+
 
 
     fun nextQuestion(id:Int) {
@@ -112,7 +120,7 @@ class QuizViewModel @Inject constructor (var repository: Repository, application
             }
         }*/
         viewModelScope.launch {
-            prepareQuestionsGame1()
+            prepareQuestionsGame1(id)
             nextQuestion(id) // Soruları yeniden hazırladıktan sonra ilk soruyu yükleyin.
         }
 

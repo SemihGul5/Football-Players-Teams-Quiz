@@ -64,12 +64,22 @@ class GameCategoryAdapter(
             val binding = holder.binding
             binding.kategoryTitle.text = category.title
             binding.rankButton.paintFlags =binding.rankButton.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-
+            val easyGameId = category.id
+            val mediumGameId = category.id + 100
+            val hardGameId = category.id + 200
 
 
             binding.startGameButton.setOnClickListener {
                 showProgressBar()
-                val navDirection = HomeFragmentDirections.actionHomeFragmentToGameFragment(category.id)
+                val selectedTabPosition = binding.difficultyTabLayout.selectedTabPosition
+
+                val gameId = when (selectedTabPosition) {
+                    0 -> easyGameId
+                    1 -> mediumGameId
+                    2 -> hardGameId
+                    else -> easyGameId
+                }
+                val navDirection = HomeFragmentDirections.actionHomeFragmentToGameFragment(gameId,category.title)
                 Navigation.findNavController(it).navigate(navDirection)
             }
             binding.rankButton.setOnClickListener {
@@ -77,22 +87,22 @@ class GameCategoryAdapter(
                 Navigation.findNavController(it).navigate(navDirection)
             }
 
-            val tabLayout = binding.difficultyTabLayout  // GameCategoryItemBinding'den tabLayout'a erişim
-            tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+
+            binding.difficultyTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     when (tab.position) {
                         0 -> {
-                            // Kolay sekme seçili - Verileri güncelle
+                            // Kolay
                             binding.highestScoreText.text = context.getString(R.string.en_yuksek_skorum) +" "+ category.highestScore
                             binding.rankText.text=context.getString(R.string.siralama) +": "+category.rank.toString()
                         }
                         1 -> {
-                            // Orta sekme seçili - Verileri güncelle
+                            // Orta
                             binding.highestScoreText.text = context.getString(R.string.en_yuksek_skorum) +" "+ category.highestScore
                             binding.rankText.text=context.getString(R.string.siralama) +": "+category.rank.toString()
                         }
                         2 -> {
-                            // Zor sekme seçili - Verileri güncelle
+                            // Zor
                             binding.highestScoreText.text = context.getString(R.string.en_yuksek_skorum) +" "+ category.highestScore
                             binding.rankText.text=context.getString(R.string.siralama) +": "+category.rank.toString()
                         }
