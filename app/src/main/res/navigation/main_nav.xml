@@ -16,9 +16,6 @@
         <action
             android:id="@+id/action_homeFragment_to_rankFragment"
             app:destination="@id/rankFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_profileFragment2"
-            app:destination="@id/profileFragment2" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -43,9 +40,4 @@
             android:name="gameId"
             app:argType="integer" />
     </fragment>
-    <fragment
-        android:id="@+id/profileFragment2"
-        android:name="com.abrebo.playersteamsquiz.ui.fragment.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
 </navigation>

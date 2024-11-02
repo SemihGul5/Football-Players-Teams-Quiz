@@ -55,9 +55,7 @@ class DataSource(private var collectionReference: CollectionReference) {
 
     fun updateUser(user:User){
         val newUser=HashMap<String,Any>()
-        newUser["nameFamily"]=user.nameFamily!!
         newUser["userName"]=user.userName!!
-        newUser["email"]=user.email!!
         collectionReference.document(user.id!!).update(newUser)
     }
 

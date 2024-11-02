@@ -27,12 +27,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
-    private lateinit var auth: FirebaseAuth
     private lateinit var adView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        auth = FirebaseAuth.getInstance()
         initViewModel()
     }
 
@@ -59,12 +57,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         BackPressUtils.setBackPressCallback(this, viewLifecycleOwner)
 
-        binding.materialToolbar.setOnMenuItemClickListener {
-            if (it.itemId == R.id.profileFragmentToolbarMenu) {
-                Navigation.findNavController(binding.root).navigate(R.id.action_homeFragment_to_profileFragment2)
-            }
-            true
-        }
 
         viewModel.categoryList.observe(viewLifecycleOwner) { categoryList ->
             val adapter = GameCategoryAdapter(requireContext(), categoryList, viewModel){
@@ -89,7 +81,7 @@ class HomeFragment : Fragment() {
         binding.progressBarHome.visibility = View.GONE
     }
     private fun initViewModel() {
-        viewModel.getUserNameByEmail(auth.currentUser?.email!!) { userName ->
+        viewModel.getUserName() { userName ->
             if (userName != null) {
                 viewModel.loadCategories(userName)
                 viewModel.getHighestScore(userName, 1)

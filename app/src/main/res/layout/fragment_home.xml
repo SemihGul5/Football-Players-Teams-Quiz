@@ -16,7 +16,6 @@
         android:theme="?attr/actionBarTheme"
         app:titleCentered="true"
         app:titleTextColor="@color/white"
-        app:menu="@menu/toolbar_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

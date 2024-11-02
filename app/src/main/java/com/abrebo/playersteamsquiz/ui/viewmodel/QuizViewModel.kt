@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.abrebo.playersteamsquiz.data.model.PlayerQuestion
 import com.abrebo.playersteamsquiz.data.model.TeamQuestion
 import com.abrebo.playersteamsquiz.data.repo.Repository
+import com.abrebo.playersteamsquiz.datastore.AppPref
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
@@ -358,9 +359,13 @@ class QuizViewModel @Inject constructor(
         }
     }
 
-    fun getUserNameByEmail(userEmail: String, onResult: (String?) -> Unit) {
+    fun getUserName(onResult: (String?) -> Unit){
         viewModelScope.launch {
-            onResult(repository.getUserNameByEmail(userEmail))
+            val appPref= AppPref.getInstance(context)
+            viewModelScope.launch {
+                onResult(appPref.getUserName())
+                Log.e("UserName:",appPref.getUserName())
+            }
         }
     }
     private fun resetQuestions() {

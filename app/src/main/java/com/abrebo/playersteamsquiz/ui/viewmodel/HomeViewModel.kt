@@ -34,7 +34,7 @@ class HomeViewModel @Inject constructor (var repository: Repository,
 
     fun getUserName(onResult: (String?) -> Unit){
         viewModelScope.launch {
-            val appPref=AppPref(context)
+            val appPref=AppPref.getInstance(context)
             viewModelScope.launch {
                 onResult(appPref.getUserName())
                 Log.e("UserName:",appPref.getUserName())

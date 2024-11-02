@@ -2,6 +2,7 @@
     <string name="app_name">Football - Teams Quiz!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="answer">answer</string>
+    <string name="kullanici_adi_belirle">Set a Username</string>
     <string name="e_mail">E-mail</string>
     <string name="sifre">Password</string>
     <string name="IForgotMyPassword">I Forgot My Password</string>

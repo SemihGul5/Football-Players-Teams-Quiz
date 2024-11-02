@@ -295,10 +295,9 @@ class GameFragment : Fragment() {
         countDownTimer.cancel()
         isGameFinished = true
         val score = viewModel.score.value ?: 0
-        val auth=FirebaseAuth.getInstance()
-        val email=auth.currentUser?.email!!
-        viewModel.getUserNameByEmail(email){
-            if (it!=null){
+
+        viewModel.getUserName(){
+            if (it!="No have a UserName"){
                 viewModel.updateScore(score,it.toString(),id)
             }
         }
