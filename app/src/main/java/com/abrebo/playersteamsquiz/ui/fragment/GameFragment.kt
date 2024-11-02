@@ -50,10 +50,12 @@ class GameFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.nextQuestion(id)
         binding.materialToolbar2.title= title
+
         setupProgressAndTimer(5,5,5000)
         when (id) {
             1,101,201-> {
@@ -159,7 +161,9 @@ class GameFragment : Fragment() {
             }
             //
         }
-
+        viewModel.score.observe(viewLifecycleOwner) { score ->
+            binding.scoreText.text = getString(R.string.skorunuz) + " " + (viewModel.score.value ?: 0)
+        }
     }
 
     private fun setupClickListeners(id: Int) {

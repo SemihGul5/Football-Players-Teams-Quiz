@@ -48,23 +48,33 @@ class HomeViewModel @Inject constructor (var repository: Repository,
             GameCategory(3, "Futbolcu Fotoğrafından Adını Bulun"),
             GameCategory(4, "Futbolcu Overall Tahmin Oyunu"),
             GameCategory(5, "Futbolcu Market Değeri Tahmin Oyunu"),
-            GameCategory(6, "Futbolcu Ülke Tahmin Oyunu"),
+            GameCategory(6, "Futbolcu Ülke Tahmin Oyunu")
         )
 
         categoryList.value = categories
 
         categories.forEach { category ->
             viewModelScope.launch {
-                val highestScore = repository.getHighestScore(userName, category.id)
-                category.highestScore = highestScore
+                val easyGameId = category.id
+                val mediumGameId = category.id + 100
+                val hardGameId = category.id + 200
 
-                val rankUsers = repository.getAllRankUsers(category.id)
-                val userRank = rankUsers.find { it.userName == userName }?.rank ?: 0
-                category.rank = userRank
+                category.scores["easy"] = repository.getHighestScore(userName, easyGameId)
+                category.ranks["easy"] = repository.getAllRankUsers(easyGameId)
+                    .find { it.userName == userName }?.rank ?: 0
+
+                category.scores["medium"] = repository.getHighestScore(userName, mediumGameId)
+                category.ranks["medium"] = repository.getAllRankUsers(mediumGameId)
+                    .find { it.userName == userName }?.rank ?: 0
+
+                category.scores["hard"] = repository.getHighestScore(userName, hardGameId)
+                category.ranks["hard"] = repository.getAllRankUsers(hardGameId)
+                    .find { it.userName == userName }?.rank ?: 0
 
                 categoryList.postValue(categories)
             }
         }
     }
+
 
 }

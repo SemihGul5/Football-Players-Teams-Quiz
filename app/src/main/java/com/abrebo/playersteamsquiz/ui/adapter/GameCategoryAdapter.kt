@@ -32,7 +32,7 @@ class GameCategoryAdapter(
     companion object {
         private const val VIEW_TYPE_CATEGORY = 0
         private const val VIEW_TYPE_AD = 1
-        private const val AD_POSITION = 3
+        private const val AD_POSITION = 6
     }
 
     inner class CategoryViewHolder(val binding: GameCategoryItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -82,31 +82,37 @@ class GameCategoryAdapter(
                 val navDirection = HomeFragmentDirections.actionHomeFragmentToGameFragment(gameId,category.title)
                 Navigation.findNavController(it).navigate(navDirection)
             }
+
             binding.rankButton.setOnClickListener {
-                val navDirection = HomeFragmentDirections.actionHomeFragmentToRankFragment(category.id)
+                val selectedTabPosition = binding.difficultyTabLayout.selectedTabPosition
+
+                val gameId = when (selectedTabPosition) {
+                    0 -> easyGameId
+                    1 -> mediumGameId
+                    2 -> hardGameId
+                    else -> easyGameId
+                }
+                val navDirection = HomeFragmentDirections.actionHomeFragmentToRankFragment(gameId)
                 Navigation.findNavController(it).navigate(navDirection)
             }
 
+            val defaultMode = "easy"
+            binding.highestScoreText.text = context.getString(R.string.en_yuksek_skorum) + " " + (category.scores[defaultMode] ?: 0)
+            binding.rankText.text = context.getString(R.string.siralama) + ": " + (category.ranks[defaultMode] ?: 0)
 
             binding.difficultyTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
-                    when (tab.position) {
-                        0 -> {
-                            // Kolay
-                            binding.highestScoreText.text = context.getString(R.string.en_yuksek_skorum) +" "+ category.highestScore
-                            binding.rankText.text=context.getString(R.string.siralama) +": "+category.rank.toString()
-                        }
-                        1 -> {
-                            // Orta
-                            binding.highestScoreText.text = context.getString(R.string.en_yuksek_skorum) +" "+ category.highestScore
-                            binding.rankText.text=context.getString(R.string.siralama) +": "+category.rank.toString()
-                        }
-                        2 -> {
-                            // Zor
-                            binding.highestScoreText.text = context.getString(R.string.en_yuksek_skorum) +" "+ category.highestScore
-                            binding.rankText.text=context.getString(R.string.siralama) +": "+category.rank.toString()
-                        }
+                    val mode = when (tab.position) {
+                        0 -> "easy"
+                        1 ->"medium"
+                        2 -> "hard"
+                        else-> "easy"
                     }
+
+                    val highestScore = category.scores[mode] ?: 0
+                    val rank = category.ranks[mode] ?: 0
+                    binding.highestScoreText.text = context.getString(R.string.en_yuksek_skorum) + " " + highestScore
+                    binding.rankText.text = context.getString(R.string.siralama) + ": " + rank
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {}
