@@ -72,28 +72,22 @@ class GameFragment : Fragment() {
             4,104,204->{
                 answerButtons = listOf(binding.answer1, binding.answer2, binding.answer3, binding.answer4)
                 setupOtherQuestionStyle()
+                binding.questionPlayerNameText.visibility=View.VISIBLE
                 viewModel.prepareQuestionsGame4(id)
             }
             5,105,205->{
                 answerButtons = listOf(binding.answer1, binding.answer2, binding.answer3, binding.answer4)
                 setupOtherQuestionStyle()
+                binding.questionPlayerNameText.visibility=View.VISIBLE
                 viewModel.prepareQuestionsGame5(id)
             }
             6,106,206->{
                 answerButtons = listOf(binding.answer1, binding.answer2, binding.answer3, binding.answer4)
                 setupOtherQuestionStyle()
+                binding.questionPlayerNameText.visibility=View.VISIBLE
                 viewModel.prepareQuestionsGame6(id)
             }
-            7,107,207->{
-                answerButtons = listOf(binding.answer1, binding.answer2, binding.answer3, binding.answer4)
-                setupOtherQuestionStyle()
-                viewModel.prepareQuestionsGame7(id)
-            }
-            8,108,208->{
-                answerButtons = listOf(binding.answer1, binding.answer2, binding.answer3, binding.answer4)
-                setupOtherQuestionStyle()
-                viewModel.prepareQuestionsGame8(id)
-            }
+
 
         }
 
@@ -149,8 +143,13 @@ class GameFragment : Fragment() {
                     }
                 }
             }
-            3,103,203,5,105,205,7,107,207,8,108,208->{
+            3,103,203,4,104,204,5,105,205,6,106,206->{
                 viewModel.playerQuestion.observe(viewLifecycleOwner){question->
+                    when (id){
+                        4,104,204,5,105,205,6,106,206->{
+                            binding.questionPlayerNameText.text=question.player_name
+                        }
+                    }
                     binding.game2FlagImage.setImageResource(question.player_image_url)
                     answerButtons.forEachIndexed { index, button ->
                         button.text = question.options[index].toString()
@@ -158,16 +157,6 @@ class GameFragment : Fragment() {
                     }
                 }
             }
-            4,104,204,6,106,206->{
-                viewModel.teamQuestion.observe(viewLifecycleOwner){question->
-                    binding.game2FlagImage.setImageResource(question.team_image_url)
-                    answerButtons.forEachIndexed { index, button ->
-                        button.text = question.options[index].toString()
-                        button.tag = question.options[index]
-                    }
-                }
-            }
-
             //
         }
 
@@ -214,46 +203,20 @@ class GameFragment : Fragment() {
                     }
                 }
             }
-            5,105,205->{
+            4,104,204 -> {
                 answerButtons.forEach { button ->
                     button.setOnClickListener { view ->
                         val selected = view.tag as String
                         if (!viewModel.checkAnswerOverall(selected)) {
                             showScoreDialog(id)
                         } else {
-                            viewModel.nextQuestion(id)
-                            resetTimer(5000,id)
-                        }
-                    }
-                }
-            }
-            4,104,204->{
-                answerButtons.forEach { button ->
-                    button.setOnClickListener { view ->
-                        val selected = view.tag as String
-                        if (!viewModel.checkAnswerTeam(selected)) {
-                            showScoreDialog(id)
-                        } else {
                             viewModel.nextQuestionTeam(id)
-                            resetTimer(5000,id)
+                            resetTimer(5000, id)
                         }
                     }
                 }
             }
-            6,106,206->{
-                answerButtons.forEach { button ->
-                    button.setOnClickListener { view ->
-                        val selected = view.tag as String
-                        if (!viewModel.checkAnswerTeamOverall(selected)) {
-                            showScoreDialog(id)
-                        } else {
-                            viewModel.nextQuestionTeam(id)
-                            resetTimer(5000,id)
-                        }
-                    }
-                }
-            }
-            7,107,207->{
+            5,105,205->{
                 answerButtons.forEach { button ->
                     button.setOnClickListener { view ->
                         val selected = view.tag as String
@@ -266,20 +229,20 @@ class GameFragment : Fragment() {
                     }
                 }
             }
-            8,108,8->{
+
+            6,106,206->{
                 answerButtons.forEach { button ->
                     button.setOnClickListener { view ->
                         val selected = view.tag as String
                         if (!viewModel.checkAnswerCountry(selected)) {
                             showScoreDialog(id)
                         } else {
-                            viewModel.nextQuestion(id)
+                            viewModel.nextQuestionTeam(id)
                             resetTimer(5000,id)
                         }
                     }
                 }
             }
-
             //
         }
     }

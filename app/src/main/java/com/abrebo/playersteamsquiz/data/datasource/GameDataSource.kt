@@ -11,13 +11,25 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class GameDataSource(
-    private val dao:QuestionDao,
-    private val collectionReferenceGame1Easy:CollectionReference,
-    private val collectionReferenceGame1Medium:CollectionReference,
-    private val collectionReferenceGame1Hard:CollectionReference,
-    private val collectionReferenceGame2Easy:CollectionReference,
-    private val collectionReferenceGame2Medium:CollectionReference,
-    private val collectionReferenceGame2Hard:CollectionReference,) {
+    private val dao: QuestionDao,
+    private val collectionReferenceGame1Easy: CollectionReference,
+    private val collectionReferenceGame1Medium: CollectionReference,
+    private val collectionReferenceGame1Hard: CollectionReference,
+    private val collectionReferenceGame2Easy: CollectionReference,
+    private val collectionReferenceGame2Medium: CollectionReference,
+    private val collectionReferenceGame2Hard: CollectionReference,
+    private val collectionReferenceGame3Easy: CollectionReference,
+    private val collectionReferenceGame3Medium: CollectionReference,
+    private val collectionReferenceGame3Hard: CollectionReference,
+    private val collectionReferenceGame4Easy: CollectionReference,
+    private val collectionReferenceGame4Medium: CollectionReference,
+    private val collectionReferenceGame4Hard: CollectionReference,
+    private val collectionReferenceGame5Easy: CollectionReference,
+    private val collectionReferenceGame5Medium: CollectionReference,
+    private val collectionReferenceGame5Hard: CollectionReference,
+    private val collectionReferenceGame6Easy: CollectionReference,
+    private val collectionReferenceGame6Medium: CollectionReference,
+    private val collectionReferenceGame6Hard: CollectionReference,) {
 
     suspend fun getPlayers():List<PlayerQuestion> =
         withContext(Dispatchers.IO){
@@ -34,15 +46,21 @@ class GameDataSource(
             1 -> collectionReferenceGame1Easy
             101 -> collectionReferenceGame1Medium
             201 -> collectionReferenceGame1Hard
-            2 -> collectionReferenceGame1Medium
-            102 -> collectionReferenceGame1Hard
-            202 -> collectionReferenceGame2Easy
-            3 -> collectionReferenceGame1Hard
-            4 -> collectionReferenceGame2Easy
-            5 -> collectionReferenceGame2Medium
-            6 -> collectionReferenceGame2Hard
-            7 -> collectionReferenceGame2Hard
-            8 -> collectionReferenceGame2Hard
+            2 -> collectionReferenceGame2Easy
+            102 -> collectionReferenceGame2Medium
+            202 -> collectionReferenceGame2Hard
+            3 -> collectionReferenceGame3Easy
+            103 -> collectionReferenceGame3Medium
+            203 -> collectionReferenceGame3Hard
+            4 -> collectionReferenceGame4Easy
+            104 -> collectionReferenceGame4Medium
+            204 -> collectionReferenceGame4Hard
+            5 -> collectionReferenceGame5Easy
+            105 -> collectionReferenceGame5Medium
+            205 -> collectionReferenceGame5Hard
+            6 -> collectionReferenceGame6Easy
+            106 -> collectionReferenceGame6Medium
+            206 -> collectionReferenceGame6Hard
             else -> throw IllegalArgumentException("Geçersiz oyun numarası: $game")
         }
         val document = collectionReference.document(userId).get().await()
@@ -55,15 +73,21 @@ class GameDataSource(
             1 -> collectionReferenceGame1Easy
             101 -> collectionReferenceGame1Medium
             201 -> collectionReferenceGame1Hard
-            2 -> collectionReferenceGame1Medium
-            102 -> collectionReferenceGame1Hard
-            202 -> collectionReferenceGame2Easy
-            3 -> collectionReferenceGame1Hard
-            4 -> collectionReferenceGame2Easy
-            5 -> collectionReferenceGame2Medium
-            6 -> collectionReferenceGame2Hard
-            7 -> collectionReferenceGame2Hard
-            8 -> collectionReferenceGame2Hard
+            2 -> collectionReferenceGame2Easy
+            102 -> collectionReferenceGame2Medium
+            202 -> collectionReferenceGame2Hard
+            3 -> collectionReferenceGame3Easy
+            103 -> collectionReferenceGame3Medium
+            203 -> collectionReferenceGame3Hard
+            4 -> collectionReferenceGame4Easy
+            104 -> collectionReferenceGame4Medium
+            204 -> collectionReferenceGame4Hard
+            5 -> collectionReferenceGame5Easy
+            105 -> collectionReferenceGame5Medium
+            205 -> collectionReferenceGame5Hard
+            6 -> collectionReferenceGame6Easy
+            106 -> collectionReferenceGame6Medium
+            206 -> collectionReferenceGame6Hard
             else -> throw IllegalArgumentException("Geçersiz oyun numarası: $game")
         }
         val userDoc = collectionReference.document(userId).get().await()
@@ -95,15 +119,21 @@ class GameDataSource(
             1 -> collectionReferenceGame1Easy
             101 -> collectionReferenceGame1Medium
             201 -> collectionReferenceGame1Hard
-            2 -> collectionReferenceGame1Medium
-            102 -> collectionReferenceGame1Hard
-            202 -> collectionReferenceGame2Easy
-            3 -> collectionReferenceGame1Hard
-            4 -> collectionReferenceGame2Easy
-            5 -> collectionReferenceGame2Medium
-            6 -> collectionReferenceGame2Hard
-            7 -> collectionReferenceGame2Hard
-            8 -> collectionReferenceGame2Hard
+            2 -> collectionReferenceGame2Easy
+            102 -> collectionReferenceGame2Medium
+            202 -> collectionReferenceGame2Hard
+            3 -> collectionReferenceGame3Easy
+            103 -> collectionReferenceGame3Medium
+            203 -> collectionReferenceGame3Hard
+            4 -> collectionReferenceGame4Easy
+            104 -> collectionReferenceGame4Medium
+            204 -> collectionReferenceGame4Hard
+            5 -> collectionReferenceGame5Easy
+            105 -> collectionReferenceGame5Medium
+            205 -> collectionReferenceGame5Hard
+            6 -> collectionReferenceGame6Easy
+            106 -> collectionReferenceGame6Medium
+            206 -> collectionReferenceGame6Hard
             else -> throw IllegalArgumentException("Geçersiz oyun numarası: $game")
         }
         val users = collectionReference.get().await().documents
@@ -125,15 +155,21 @@ class GameDataSource(
             1 -> collectionReferenceGame1Easy
             101 -> collectionReferenceGame1Medium
             201 -> collectionReferenceGame1Hard
-            2 -> collectionReferenceGame1Medium
-            102 -> collectionReferenceGame1Hard
-            202 -> collectionReferenceGame2Easy
-            3 -> collectionReferenceGame1Hard
-            4 -> collectionReferenceGame2Easy
-            5 -> collectionReferenceGame2Medium
-            6 -> collectionReferenceGame2Hard
-            7 -> collectionReferenceGame2Hard
-            8 -> collectionReferenceGame2Hard
+            2 -> collectionReferenceGame2Easy
+            102 -> collectionReferenceGame2Medium
+            202 -> collectionReferenceGame2Hard
+            3 -> collectionReferenceGame3Easy
+            103 -> collectionReferenceGame3Medium
+            203 -> collectionReferenceGame3Hard
+            4 -> collectionReferenceGame4Easy
+            104 -> collectionReferenceGame4Medium
+            204 -> collectionReferenceGame4Hard
+            5 -> collectionReferenceGame5Easy
+            105 -> collectionReferenceGame5Medium
+            205 -> collectionReferenceGame5Hard
+            6 -> collectionReferenceGame6Easy
+            106 -> collectionReferenceGame6Medium
+            206 -> collectionReferenceGame6Hard
             else -> throw IllegalArgumentException("Geçersiz oyun numarası: $game")
         }
         return try {

@@ -48,6 +48,55 @@ class AppModule {
     @Retention(AnnotationRetention.BINARY)
     annotation class Game2HardCollection
 
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class Game3EasyCollection
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class Game3MediumCollection
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class Game3HardCollection
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class Game4EasyCollection
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class Game4MediumCollection
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class Game4HardCollection
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class Game5EasyCollection
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class Game5MediumCollection
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class Game5HardCollection
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class Game6EasyCollection
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class Game6MediumCollection
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class Game6HardCollection
+
+
     @Provides
     @Singleton
     fun provideDataSource(@UsersCollection collectionReference: CollectionReference):DataSource{
@@ -62,9 +111,25 @@ class AppModule {
                               @Game2EasyCollection collectionReferenceGame2Easy: CollectionReference,
                               @Game2MediumCollection collectionReferenceGame2Medium: CollectionReference,
                               @Game2HardCollection collectionReferenceGame2Hard: CollectionReference,
+                              @Game3EasyCollection collectionReferenceGame3Easy: CollectionReference,
+                              @Game3MediumCollection collectionReferenceGame3Medium: CollectionReference,
+                              @Game3HardCollection collectionReferenceGame3Hard: CollectionReference,
+                              @Game4EasyCollection collectionReferenceGame4Easy: CollectionReference,
+                              @Game4MediumCollection collectionReferenceGame4Medium: CollectionReference,
+                              @Game4HardCollection collectionReferenceGame4Hard: CollectionReference,
+                              @Game5EasyCollection collectionReferenceGame5Easy: CollectionReference,
+                              @Game5MediumCollection collectionReferenceGame5Medium: CollectionReference,
+                              @Game5HardCollection collectionReferenceGame5Hard: CollectionReference,
+                              @Game6EasyCollection collectionReferenceGame6Easy: CollectionReference,
+                              @Game6MediumCollection collectionReferenceGame6Medium: CollectionReference,
+                              @Game6HardCollection collectionReferenceGame6Hard: CollectionReference,
                               ):GameDataSource{
         return GameDataSource(dao,collectionReferenceGame1Easy,collectionReferenceGame1Medium,collectionReferenceGame1Hard,
-            collectionReferenceGame2Easy,collectionReferenceGame2Medium, collectionReferenceGame2Hard)
+            collectionReferenceGame2Easy,collectionReferenceGame2Medium, collectionReferenceGame2Hard,
+            collectionReferenceGame3Easy,collectionReferenceGame3Medium,collectionReferenceGame3Hard,
+            collectionReferenceGame4Easy,collectionReferenceGame4Medium, collectionReferenceGame4Hard,
+            collectionReferenceGame5Easy,collectionReferenceGame5Medium,collectionReferenceGame5Hard,
+            collectionReferenceGame6Easy,collectionReferenceGame6Medium, collectionReferenceGame6Hard)
     }
 
     @Provides
@@ -90,39 +155,114 @@ class AppModule {
     @Provides
     @Singleton
     @Game1EasyCollection
-    fun provideCollectionReferenceGame1():CollectionReference{
+    fun provideCollectionReferenceGame1Easy():CollectionReference{
         return Firebase.firestore.collection("Game1_Easy")
     }
     @Provides
     @Singleton
     @Game1MediumCollection
-    fun provideCollectionReferenceGame2():CollectionReference{
+    fun provideCollectionReferenceGame1Medium():CollectionReference{
         return Firebase.firestore.collection("Game1_Medium")
     }
     @Provides
     @Singleton
     @Game1HardCollection
-    fun provideCollectionReferenceGame3():CollectionReference{
+    fun provideCollectionReferenceGame1Hard():CollectionReference{
         return Firebase.firestore.collection("Game1_Hard")
     }
     @Provides
     @Singleton
     @Game2EasyCollection
-    fun provideCollectionReferenceGame4():CollectionReference{
+    fun provideCollectionReferenceGame2Easy():CollectionReference{
         return Firebase.firestore.collection("Game2_Easy")
     }
     @Provides
     @Singleton
     @Game2MediumCollection
-    fun provideCollectionReferenceGame6():CollectionReference{
+    fun provideCollectionReferenceGame2Medium():CollectionReference{
         return Firebase.firestore.collection("Game2_Medium")
     }
     @Provides
     @Singleton
     @Game2HardCollection
-    fun provideCollectionReferenceGame7():CollectionReference{
+    fun provideCollectionReferenceGame2Hard():CollectionReference{
         return Firebase.firestore.collection("Game2_Hard")
     }
-
+    //
+    @Provides
+    @Singleton
+    @Game3EasyCollection
+    fun provideCollectionReferenceGame3Easy():CollectionReference{
+        return Firebase.firestore.collection("Game3_Easy")
+    }
+    @Provides
+    @Singleton
+    @Game3MediumCollection
+    fun provideCollectionReferenceGame3Medium():CollectionReference{
+        return Firebase.firestore.collection("Game3_Medium")
+    }
+    @Provides
+    @Singleton
+    @Game3HardCollection
+    fun provideCollectionReferenceGame3Hard():CollectionReference{
+        return Firebase.firestore.collection("Game3_Hard")
+    }
+    //
+    @Provides
+    @Singleton
+    @Game4EasyCollection
+    fun provideCollectionReferenceGame4Easy():CollectionReference{
+        return Firebase.firestore.collection("Game4_Easy")
+    }
+    @Provides
+    @Singleton
+    @Game4MediumCollection
+    fun provideCollectionReferenceGame4Medium():CollectionReference{
+        return Firebase.firestore.collection("Game4_Medium")
+    }
+    @Provides
+    @Singleton
+    @Game4HardCollection
+    fun provideCollectionReferenceGame4Hard():CollectionReference{
+        return Firebase.firestore.collection("Game4_Hard")
+    }
+    //
+    @Provides
+    @Singleton
+    @Game5EasyCollection
+    fun provideCollectionReferenceGame5Easy():CollectionReference{
+        return Firebase.firestore.collection("Game5_Easy")
+    }
+    @Provides
+    @Singleton
+    @Game5MediumCollection
+    fun provideCollectionReferenceGame5Medium():CollectionReference{
+        return Firebase.firestore.collection("Game5_Medium")
+    }
+    @Provides
+    @Singleton
+    @Game5HardCollection
+    fun provideCollectionReferenceGame5Hard():CollectionReference{
+        return Firebase.firestore.collection("Game5_Hard")
+    }
+    //
+    @Provides
+    @Singleton
+    @Game6EasyCollection
+    fun provideCollectionReferenceGame6Easy():CollectionReference{
+        return Firebase.firestore.collection("Game6_Easy")
+    }
+    @Provides
+    @Singleton
+    @Game6MediumCollection
+    fun provideCollectionReferenceGame6Medium():CollectionReference{
+        return Firebase.firestore.collection("Game6_Medium")
+    }
+    @Provides
+    @Singleton
+    @Game6HardCollection
+    fun provideCollectionReferenceGame6Hard():CollectionReference{
+        return Firebase.firestore.collection("Game6_Hard")
+    }
 
 }

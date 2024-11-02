@@ -3,6 +3,7 @@ package com.abrebo.playersteamsquiz.ui.viewmodel
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +16,9 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.random.Random
 import javax.inject.Inject
 
@@ -50,9 +53,6 @@ class QuizViewModel @Inject constructor(
     init {
         _score.value = 0
 
-    }
-    private fun getTeams(){
-        teams= repository.getAllTeams().toMutableList()
     }
 
     fun prepareQuestionsGame1(id: Int) {
@@ -91,7 +91,6 @@ class QuizViewModel @Inject constructor(
             questionsPlayer.add(question)
         }
     }
-
     fun prepareQuestionsGame2(id: Int) {
         val allTeams = repository.getAllTeams()
         val teamsToUse = when (id) {
@@ -163,7 +162,11 @@ class QuizViewModel @Inject constructor(
             questionsPlayer.add(question)
         }
     }
-    fun prepareQuestionsGame5(id: Int) {
+
+
+
+
+    fun prepareQuestionsGame4(id: Int) {
         val allPlayers = repository.getAllPlayers()
         val playersToUse = when (id) {
             3 -> allPlayers.take(180)
@@ -200,78 +203,8 @@ class QuizViewModel @Inject constructor(
             questionsPlayer.add(question)
         }
     }
-    fun prepareQuestionsGame4(id: Int) {
-        val allTeams = repository.getAllTeams()
-        val teamsToUse = when (id) {
-            4 -> allTeams.take(60)
-            104 -> allTeams.take(120)
-            204 -> allTeams
-            else -> allTeams.take(60)
-        }
 
-        val shuffledTeams = teamsToUse.shuffled()
-        questionsTeam.clear()
-
-        shuffledTeams.forEach { correctTeam ->
-            val options = shuffledTeams
-                .filter { it.team_image_url != correctTeam.team_image_url }
-                .shuffled()
-                .take(3)
-                .map { it.team_name }
-                .toMutableList()
-
-            options.add(Random.nextInt(4), correctTeam.team_name)
-
-            val question = TeamQuestion(
-                team_name = correctTeam.team_name,
-                overall = correctTeam.overall,
-                league_name = correctTeam.league_name,
-                team_image_url = correctTeam.team_image_url,
-                country_name = correctTeam.country_name,
-                european_cup = correctTeam.european_cup,
-                stars = correctTeam.stars,
-                options = options
-            )
-            questionsTeam.add(question)
-        }
-    }
-    fun prepareQuestionsGame6(id: Int) {
-        val allPlayers = repository.getAllTeams()
-        val playersToUse = when (id) {
-            3 -> allPlayers.take(60)
-            103 -> allPlayers.take(120)
-            203 -> allPlayers
-            else -> allPlayers.take(60)
-        }
-
-        val shuffledPlayers = playersToUse.shuffled()
-        questionsPlayer.clear()
-
-        shuffledPlayers.forEach { correctTeam ->
-            val options = shuffledPlayers
-                .filter { it.team_name != correctTeam.team_name && it.overall!=correctTeam.overall }
-                .distinctBy { it.overall }
-                .shuffled()
-                .take(3)
-                .map { it.overall }
-                .toMutableList()
-
-            options.add(Random.nextInt(4), correctTeam.overall)
-
-            val question = TeamQuestion(
-                team_name = correctTeam.team_name,
-                overall = correctTeam.overall,
-                league_name = correctTeam.league_name,
-                team_image_url = correctTeam.team_image_url,
-                country_name = correctTeam.country_name,
-                european_cup = correctTeam.european_cup,
-                stars = correctTeam.stars,
-                options = options
-            )
-            questionsTeam.add(question)
-        }
-    }
-    fun prepareQuestionsGame7(id: Int) {
+    fun prepareQuestionsGame5(id: Int) {
         val allPlayers = repository.getAllPlayers()
         val playersToUse = when (id) {
             3 -> allPlayers.take(180)
@@ -308,7 +241,7 @@ class QuizViewModel @Inject constructor(
             questionsPlayer.add(question)
         }
     }
-    fun prepareQuestionsGame8(id: Int) {
+    fun prepareQuestionsGame6(id: Int) {
         val allPlayers = repository.getAllPlayers()
         val playersToUse = when (id) {
             3 -> allPlayers.take(180)
@@ -342,9 +275,11 @@ class QuizViewModel @Inject constructor(
                 market_value = correctPlayer.market_value,
                 options = options
             )
+
             questionsPlayer.add(question)
         }
     }
+
     fun nextQuestion(id: Int) {
         if (questionIndex < questionsPlayer.size) {
             _playerQuestion.value = questionsPlayer[questionIndex]
@@ -411,22 +346,6 @@ class QuizViewModel @Inject constructor(
             false
         }
     }
-    fun checkAnswerTeam(selected: String): Boolean {
-        return if (selected == _teamQuestion.value?.team_name) {
-            _score.value = (_score.value ?: 0) + 1
-            true
-        } else {
-            false
-        }
-    }
-    fun checkAnswerTeamOverall(selected: String): Boolean {
-        return if (selected == _teamQuestion.value?.overall) {
-            _score.value = (_score.value ?: 0) + 1
-            true
-        } else {
-            false
-        }
-    }
     fun updateScore(newScore: Int, userId: String, game: Int) {
         _score.value = newScore
         viewModelScope.launch {
@@ -477,14 +396,6 @@ class QuizViewModel @Inject constructor(
             }
             6, 106, 206 -> {
                 prepareQuestionsGame6(id)
-                nextQuestion(id)
-            }
-            7, 107, 207 -> {
-                prepareQuestionsGame7(id)
-                nextQuestion(id)
-            }
-            8, 108, 208 -> {
-                prepareQuestionsGame8(id)
                 nextQuestion(id)
             }
         }

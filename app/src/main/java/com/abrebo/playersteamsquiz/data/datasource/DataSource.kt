@@ -6,7 +6,7 @@ import com.abrebo.playersteamsquiz.data.model.User
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.coroutines.tasks.await
 
-class DataSource(var collectionReference: CollectionReference) {
+class DataSource(private var collectionReference: CollectionReference) {
     var userList=MutableLiveData<List<User>>()
 
     fun uploadUser():MutableLiveData<List<User>>{
@@ -74,24 +74,5 @@ class DataSource(var collectionReference: CollectionReference) {
             false
         }
     }
-    suspend fun getUserNameByEmail(userEmail: String): String? {
-        return try {
-            val querySnapshot = collectionReference
-                .whereEqualTo("email", userEmail)
-                .get()
-                .await()
-
-            if (!querySnapshot.isEmpty) {
-                val document = querySnapshot.documents.first()
-                document.getString("userName")
-            } else {
-                null
-            }
-        } catch (e: Exception) {
-            Log.e("hata", e.message.toString())
-            null
-        }
-    }
-
 
 }

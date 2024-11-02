@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.abrebo.playersteamsquiz.R
 import com.abrebo.playersteamsquiz.data.model.GameCategory
 import com.abrebo.playersteamsquiz.data.repo.Repository
+import com.abrebo.playersteamsquiz.datastore.AppPref
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,29 +18,27 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor (var repository: Repository,
-                                             application: Application): AndroidViewModel(application){
+                                         application: Application): AndroidViewModel(application){
     @SuppressLint("StaticFieldLeak")
     private val context = getApplication<Application>().applicationContext
     val highestScore = MutableLiveData<Int>()
     val categoryList = MutableLiveData<List<GameCategory>>()
-    val isClicked = MutableLiveData<Boolean>(false)
+
+
     fun getHighestScore(userName: String,game:Int) {
         viewModelScope.launch {
             val currentHighestScore = repository.getHighestScore(userName,game)
             highestScore.value = currentHighestScore
         }
     }
-    fun click() {
-        isClicked.value = true
-    }
 
-    fun resetClick() {
-        isClicked.value = false
-    }
-
-    fun getUserNameByEmail(userEmail: String, onResult: (String?) -> Unit){
+    fun getUserName(onResult: (String?) -> Unit){
         viewModelScope.launch {
-            onResult(repository.getUserNameByEmail(userEmail))
+            val appPref=AppPref(context)
+            viewModelScope.launch {
+                onResult(appPref.getUserName())
+                Log.e("UserName:",appPref.getUserName())
+            }
         }
     }
     fun loadCategories(userName: String) {
@@ -47,11 +46,9 @@ class HomeViewModel @Inject constructor (var repository: Repository,
             GameCategory(1, "Futbolcu Fotoğrafını bulun"),
             GameCategory(2, "Takım Fotoğrafını bulun"),
             GameCategory(3, "Futbolcu Fotoğrafından Adını Bulun"),
-            GameCategory(4, "Takım Fotoğrafından Adını Bulun"),
-            GameCategory(5, "Futbolcu Overall Tahmin Oyunu"),
-            GameCategory(6, "Takım Overall Tahmin Oyunu"),
-            GameCategory(7, "Futbolcu Market Değeri Tahmin Oyunu"),
-            GameCategory(8, "Futbolcu Ülke Tahmin Oyunu"),
+            GameCategory(4, "Futbolcu Overall Tahmin Oyunu"),
+            GameCategory(5, "Futbolcu Market Değeri Tahmin Oyunu"),
+            GameCategory(6, "Futbolcu Ülke Tahmin Oyunu"),
         )
 
         categoryList.value = categories

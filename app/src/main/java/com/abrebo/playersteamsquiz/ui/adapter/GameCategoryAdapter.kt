@@ -32,7 +32,7 @@ class GameCategoryAdapter(
     companion object {
         private const val VIEW_TYPE_CATEGORY = 0
         private const val VIEW_TYPE_AD = 1
-        private const val AD_POSITION = 4
+        private const val AD_POSITION = 3
     }
 
     inner class CategoryViewHolder(val binding: GameCategoryItemBinding) : RecyclerView.ViewHolder(binding.root)
