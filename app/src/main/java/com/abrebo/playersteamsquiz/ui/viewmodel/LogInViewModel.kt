@@ -2,23 +2,12 @@ package com.abrebo.playersteamsquiz.ui.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.graphics.Color
-import android.util.Log
-import android.view.View
-import android.widget.ProgressBar
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.Navigation
-import com.abrebo.playersteamsquiz.R
 import com.abrebo.playersteamsquiz.data.model.User
 import com.abrebo.playersteamsquiz.data.repo.Repository
 import com.abrebo.playersteamsquiz.datastore.AppPref
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

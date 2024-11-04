@@ -170,9 +170,9 @@ class QuizViewModel @Inject constructor(
     fun prepareQuestionsGame4(id: Int) {
         val allPlayers = repository.getAllPlayers()
         val playersToUse = when (id) {
-            3 -> allPlayers.take(180)
-            103 -> allPlayers.take(360)
-            203 -> allPlayers
+            4 -> allPlayers.take(180)
+            104 -> allPlayers.take(360)
+            204 -> allPlayers
             else -> allPlayers.take(180)
         }
 
@@ -184,11 +184,11 @@ class QuizViewModel @Inject constructor(
                 .filter { it.id != correctPlayer.id && it.overall!=correctPlayer.overall }
                 .distinctBy { it.overall }
                 .shuffled()
-                .take(3)
+                .take(1)
                 .map { it.overall }
                 .toMutableList()
 
-            options.add(Random.nextInt(4), correctPlayer.overall)
+            options.add(Random.nextInt(2), correctPlayer.overall)
 
             val question = PlayerQuestion(
                 id = correctPlayer.id,
@@ -208,9 +208,9 @@ class QuizViewModel @Inject constructor(
     fun prepareQuestionsGame5(id: Int) {
         val allPlayers = repository.getAllPlayers()
         val playersToUse = when (id) {
-            3 -> allPlayers.take(180)
-            103 -> allPlayers.take(360)
-            203 -> allPlayers
+            5 -> allPlayers.take(180)
+            105 -> allPlayers.take(360)
+            205 -> allPlayers
             else -> allPlayers.take(180)
         }
 
@@ -222,11 +222,11 @@ class QuizViewModel @Inject constructor(
                 .filter { it.id != correctPlayer.id && it.market_value!=correctPlayer.market_value }
                 .distinctBy { it.market_value }
                 .shuffled()
-                .take(3)
+                .take(1)
                 .map { it.market_value }
                 .toMutableList()
 
-            options.add(Random.nextInt(4), correctPlayer.market_value)
+            options.add(Random.nextInt(2), correctPlayer.market_value)
 
             val question = PlayerQuestion(
                 id = correctPlayer.id,
@@ -245,9 +245,9 @@ class QuizViewModel @Inject constructor(
     fun prepareQuestionsGame6(id: Int) {
         val allPlayers = repository.getAllPlayers()
         val playersToUse = when (id) {
-            3 -> allPlayers.take(180)
-            103 -> allPlayers.take(360)
-            203 -> allPlayers
+            6-> allPlayers.take(180)
+            106 -> allPlayers.take(360)
+            206 -> allPlayers
             else -> allPlayers.take(180)
         }
 

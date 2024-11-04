@@ -11,8 +11,6 @@ import com.abrebo.playersteamsquiz.data.model.GameCategory
 import com.abrebo.playersteamsquiz.data.repo.Repository
 import com.abrebo.playersteamsquiz.datastore.AppPref
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -43,12 +41,13 @@ class HomeViewModel @Inject constructor (var repository: Repository,
     }
     fun loadCategories(userName: String) {
         val categories = listOf(
-            GameCategory(1, "Futbolcu Fotoğrafını bulun"),
-            GameCategory(2, "Takım Fotoğrafını bulun"),
-            GameCategory(3, "Futbolcu Fotoğrafından Adını Bulun"),
-            GameCategory(4, "Futbolcu Overall Tahmin Oyunu"),
-            GameCategory(5, "Futbolcu Market Değeri Tahmin Oyunu"),
-            GameCategory(6, "Futbolcu Ülke Tahmin Oyunu")
+            GameCategory(1, context.getString(R.string.FindthePlayersPhoto)),
+            GameCategory(2, context.getString(R.string.FindtheTeamPhoto)),
+            GameCategory(3, context.getString(R.string.FindthePlayerNamefromthePhoto)),
+            GameCategory(6, context.getString(R.string.FootballPlayerCountryGuessingGame)),
+            GameCategory(4, context.getString(R.string.FootballPlayerOverallGuessingGame)),
+            GameCategory(5, context.getString(R.string.FootballPlayerMarketValueGuessingGame))
+
         )
 
         categoryList.value = categories

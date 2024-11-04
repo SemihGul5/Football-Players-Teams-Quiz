@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:elevation="6dp"
+    android:backgroundTint="@color/white"
     app:cardCornerRadius="16dp">
 
     <LinearLayout
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
+        android:backgroundTint="@color/white"
         android:background="?attr/selectableItemBackground">
 
         <TextView

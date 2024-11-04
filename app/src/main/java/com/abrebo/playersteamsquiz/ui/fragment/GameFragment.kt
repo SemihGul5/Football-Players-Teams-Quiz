@@ -72,14 +72,18 @@ class GameFragment : Fragment() {
                 viewModel.prepareQuestionsGame3(id)
             }
             4,104,204->{
-                answerButtons = listOf(binding.answer1, binding.answer2, binding.answer3, binding.answer4)
+                answerButtons = listOf(binding.answer1, binding.answer2)
                 setupOtherQuestionStyle()
+                binding.answer3.visibility=View.GONE
+                binding.answer4.visibility=View.GONE
                 binding.questionPlayerNameText.visibility=View.VISIBLE
                 viewModel.prepareQuestionsGame4(id)
             }
             5,105,205->{
-                answerButtons = listOf(binding.answer1, binding.answer2, binding.answer3, binding.answer4)
+                answerButtons = listOf(binding.answer1, binding.answer2)
                 setupOtherQuestionStyle()
+                binding.answer3.visibility=View.GONE
+                binding.answer4.visibility=View.GONE
                 binding.questionPlayerNameText.visibility=View.VISIBLE
                 viewModel.prepareQuestionsGame5(id)
             }
@@ -214,7 +218,7 @@ class GameFragment : Fragment() {
                         if (!viewModel.checkAnswerOverall(selected)) {
                             showScoreDialog(id)
                         } else {
-                            viewModel.nextQuestionTeam(id)
+                            viewModel.nextQuestion(id)
                             resetTimer(5000, id)
                         }
                     }
@@ -241,7 +245,7 @@ class GameFragment : Fragment() {
                         if (!viewModel.checkAnswerCountry(selected)) {
                             showScoreDialog(id)
                         } else {
-                            viewModel.nextQuestionTeam(id)
+                            viewModel.nextQuestion(id)
                             resetTimer(5000,id)
                         }
                     }
@@ -309,7 +313,7 @@ class GameFragment : Fragment() {
             .setTitle(requireContext().getString(R.string.oyun_bitti))
             .setMessage(requireContext().getString(R.string.skorunuz)+score)
             .setPositiveButton(requireContext().getString(R.string.tamam)) { _, _ ->
-                //viewModel.showInterstitialAd(requireActivity())
+                viewModel.showInterstitialAd(requireActivity())
                 Navigation.findNavController(binding.root).navigate(R.id.action_gameFragment_to_homeFragment)
             }
             .setCancelable(false)

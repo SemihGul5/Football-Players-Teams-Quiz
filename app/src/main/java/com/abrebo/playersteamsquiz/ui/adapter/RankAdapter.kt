@@ -59,14 +59,8 @@ class RankAdapter(
     }
 
     private fun setupBackground(position: Int, binding: RankItemBinding) {
-        val isDarkTheme = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
-
-        val backgroundColor = if (isDarkTheme) {
-            if (position % 2 == 0) R.color.black2 else R.color.backgroun_dark_game_category
-        } else {
-            if (position % 2 == 0) R.color.grey else R.color.white
-        }
-        val textColor = if (isDarkTheme) R.color.white else R.color.black
+        val backgroundColor = if (position % 2 == 0) R.color.grey else R.color.white
+        val textColor = R.color.black
         binding.linearLayoutDashboardItem.setBackgroundColor(ContextCompat.getColor(context, backgroundColor))
         binding.rankText.setTextColor(ContextCompat.getColor(context, textColor))
         binding.userNameText.setTextColor(ContextCompat.getColor(context, textColor))

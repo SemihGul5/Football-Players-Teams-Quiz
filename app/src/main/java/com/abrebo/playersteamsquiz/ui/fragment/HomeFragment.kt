@@ -1,16 +1,13 @@
 package com.abrebo.playersteamsquiz.ui.fragment
 
 import android.annotation.SuppressLint
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import com.abrebo.playersteamsquiz.R
 import com.abrebo.playersteamsquiz.databinding.FragmentHomeBinding
 import com.abrebo.playersteamsquiz.ui.adapter.GameCategoryAdapter
@@ -20,7 +17,6 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
